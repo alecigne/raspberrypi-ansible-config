@@ -1,0 +1,31 @@
+This project is a way to familiarize myself with [[https://www.ansible.com/][Ansible]]. The goal is
+to configure a Raspberry Pi with a freshly installed Raspbian Lite OS
+on my local network.
+
+Based on [[https://github.com/giuaig/ansible-raspi-config][this project]].
+
+* Prerequisites
+
+1. Enable Internet access on the managed Rasperry Pi (just plug an
+   Ethernet cable in or configure the Wi-Fi credentials).
+
+2. Enable SSH.
+
+3. Use ~ssh-copy-id~ on the control node to use PKA for SSH.
+
+* Using Ansible
+
+Check if the Pi is accessible :
+
+#+begin_src sh :results verbatim
+  ansible -i hosts -m ping all
+#+end_src
+
+#+RESULTS:
+: pi01 | SUCCESS => {
+:     "ansible_facts": {
+:         "discovered_interpreter_python": "/usr/bin/python"
+:     },
+:     "changed": false,
+:     "ping": "pong"
+: }
