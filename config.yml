@@ -1,31 +1,24 @@
 ---
 - hosts: all
-  remote_user: pi
 
   vars:
-    xkblayout: "fr"
+    timezone: Europe/Paris
   
   tasks:
-    - name: Create user alc
+    - name: Set timezone
+      timezone: name={{ timezone }}
       become: yes
-      user:
-        name: "{{ username }}"
-        shell: /bin/bash
-        password: "{{ password }}"
 
-    - name: Update raspi-config
-      become: true
-      apt: name=raspi-config cache_valid_time=3600
+    - name: Start time services
+      service: name=systemd-timesyncd state=started enabled=yes
+      become: yes
 
-    - name: Change keyboard layout
-      shell: "raspi-config nonint do_configure_keyboard {{ xkblayout }}"
+    - name: Run timedatectl status
+      command: timedatectl status
+      changed_when: false
+      register: timedatectl_result
 
-  vars_prompt:
-    - name: "username"
-      prompt: "Username"
-      private: no
-    - name: "password"
-      prompt: "Password"
-      private: yes
-      encrypt: "sha512_crypt"
-      confirm: yes
+    - name: Enable ntp
+      command: timedatectl set-ntp true
+      when: "'NTP service: inactive' in timedatectl_result.stdout"
+      become: yes
