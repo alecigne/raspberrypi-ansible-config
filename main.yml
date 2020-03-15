@@ -1,4 +1,11 @@
 - hosts: all
+  become: yes
+
+  vars:
+    docker_install_compose: false
+    docker_users:
+      - pi
 
   roles:
     - config
+    - geerlingguy.docker_arm
