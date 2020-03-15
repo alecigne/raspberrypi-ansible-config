@@ -6,12 +6,15 @@ Based on [[https://github.com/giuaig/ansible-raspi-config][this project]].
 
 * Prerequisites
 
-1. Enable Internet access on the managed Rasperry Pi (just plug an
+1. Write a Raspian Lite image to the SD card. Enable SSH by placing a
+   file named "ssh" onto the SD card's boot partition.
+
+2. Enable Internet access on the managed Rasperry Pi (just plug an
    Ethernet cable in or configure the Wi-Fi credentials).
 
-2. Enable SSH.
-
 3. Use ~ssh-copy-id~ on the control node to use PKA for SSH.
+
+4. Make the Raspberry Pi's IP static in the router settings.
 
 * Using Ansible
 
