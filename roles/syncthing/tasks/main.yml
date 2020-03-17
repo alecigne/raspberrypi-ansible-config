@@ -1,0 +1,20 @@
+---
+- name: "Run a Syncthing Docker container"
+  become: yes
+  docker_container:
+    restart: yes
+    restart_policy: unless-stopped
+    name: syncthing
+    image: linuxserver/syncthing
+    pull: yes
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Paris"
+      UMASK_SET: "022"
+    volumes:
+      - "/home/pi/syncthing:/config"
+    ports:
+      - '8384:8384'
+      - '22000:22000'
+      - '21027:21027/udp'
