@@ -1,0 +1,19 @@
+---
+- name: "Install pip"
+  become: yes
+  apt:
+    name: python3-pip
+    state: present
+
+- name: "Add the Python client for Docker"
+  pip:
+    executable: pip3
+    name: docker
+
+- name: "Install Docker"
+  include_role:
+    name: geerlingguy.docker_arm
+  vars:
+    docker_install_compose: false
+    docker_users:
+      - pi
