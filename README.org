@@ -2,8 +2,6 @@ This project is a way to familiarize myself with [[https://www.ansible.com/][Ans
 to configure a Raspberry Pi with a freshly installed Raspbian Lite OS
 on my local network.
 
-Based on [[https://github.com/giuaig/ansible-raspi-config][this project]].
-
 * Prerequisites
 
 1. Write a Raspian Lite image to the SD card. Enable SSH by placing a
